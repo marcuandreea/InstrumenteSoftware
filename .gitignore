@@ -1,1 +1,59 @@
-/img
+## Visual Studio / .NET Core .gitignore
+# See https://github.com/github/gitignore/blob/main/VisualStudio.gitignore for reference
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Visual Studio temporary files, build results, and generated files
+.vs/
+[Bb]in/
+[Oo]bj/
+Debug/
+Release/
+Migrations/
+wwwroot/images
+wwwroot/img
+
+# Rider
+.idea/
+
+# NuGet
+packages/
+*.nupkg
+project.lock.json
+project.assets.json
+.nuget/
+
+# Dotnet publish
+publish/
+
+# Entity Framework
+*.db
+*.db-shm
+*.db-wal
+
+# ASP.NET temp files
+wwwroot/lib/
+
+# Logs
+*.log
+
+# User secrets
+secrets.json
+
+# App settings that may contain secrets or local config
+appsettings.Development.json
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Visual Studio Code
+.vscode/
+
+# Others
+node_modules/

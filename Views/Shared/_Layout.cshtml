@@ -1,0 +1,66 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<Users> signInManager;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - mvc</title>
+    <link rel="stylesheet" href="~/css/default.css" asp-append-version="true" />
+ 
+</head>
+<body>
+    <header class="header">
+        <a asp-controller="Home" asp-action="Index" class="logo">
+            <img src="~/img/logo3.jpg" alt="Logo" height="300" width="150">
+        </a>
+        <nav class="navbar">
+            <ul>
+                <li><a asp-controller="Home" asp-action="Index">Acasa</a></li>
+                <li><a asp-controller="Home" asp-action="Espressoare">Espressoare</a></li>
+                <li><a asp-controller="Home" asp-action="Poveste">Povestea noastra</a></li>
+                <li><a asp-controller="Home" asp-action="Tipuri_cafea">Tipuri cafea</a></li>
+                <li><a asp-controller="Home" asp-action="Abonament">Abonament cafea</a></li>
+                <li><a asp-controller="Home" asp-action="Recenzii">Recenzii</a></li>
+                <li><a asp-controller="Home" asp-action="Intrebari">Intrebari frecvente</a></li>
+                <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
+                @if (signInManager.IsSignedIn(User))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="Account" asp-action="Logout">Logout</a>
+                    </li>
+                }
+            </ul>
+            
+        </nav>
+
+        <div class="icons">
+            <div class="fas fa-shopping-cart" id="cart-btn"></div>
+            @if (signInManager.IsSignedIn(User))
+            {
+                <a asp-controller="Home" asp-action="User" id="loginVerify"><div class="fas fa-user" id="login-btn"></div></a>
+            }
+            else
+            {
+                <a asp-controller="Account" asp-action="Login" id="loginVerify"><div class="fas fa-user" id="login-btn"></div></a>
+            }
+            
+        </div>
+
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+   
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/footer.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
