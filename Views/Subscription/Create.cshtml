@@ -1,0 +1,26 @@
+﻿@model mvc.Models.Abonament
+
+@{
+    ViewData["Title"] = "Create Subscription";
+}
+
+<link rel="stylesheet" href="~/css/default2.css" asp-append-version="true" />
+
+<section class="bodyController">
+<h1>Create Subscription</h1>
+
+<form asp-action="Create">
+        <div class="form-group">
+            <label asp-for="Tip_Abonament" class="control-label"></label>
+            <select asp-for="Tip_Abonament" class="form-control">
+                <option value="Free">Free</option>
+                <option value="Gourmand">Gourmand</option>
+                <option value="Explorator">Explorator</option>
+                <option value="Pasionat">Pasionat</option>
+            </select>
+            <span asp-validation-for="Tip_Abonament" class="text-danger"></span>
+        </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+</section>

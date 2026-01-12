@@ -1,85 +1,87 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿// Controllers/AccountController.cs
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using mvc.Models;
+using mvc.Services;
 using mvc.ViewModels;
 
-namespace mvc.Controllers
+namespace mvc.Controllers;
+
+
+public class AccountController : Controller
 {
-    public class AccountController : Controller
+    private readonly IAccountService _accountService;
+
+    public AccountController(IAccountService accountService)
     {
-        private readonly SignInManager<Users> signInManager;
-        private readonly UserManager<Users> userManager;
+        _accountService = accountService;
+    }
 
-        public AccountController(SignInManager<Users> signInManager, UserManager<Users> userManager)
+    public IActionResult Login()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Login(LoginViewModel model)
+    {
+        if (!ModelState.IsValid)
         {
-            this.signInManager = signInManager;
-            this.userManager = userManager;
-        }
-
-        public IActionResult Login()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
-
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Email or password is incorrect.");
-                    return View(model);
-                }
-            }
             return View(model);
         }
 
-        public IActionResult Register()
+        try
         {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Register(RegisterViewModel model)
-        {
-            if (ModelState.IsValid)
+            var user = await _accountService.LoginAsync(model);
+            if (user is null)
             {
-                Users users = new Users
-                {
-                    UserName = model.Username,
-                    Email = model.Email,
-                };
-
-                var result = await userManager.CreateAsync(users, model.Password);
-
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("Login", "Account");
-                }
-                else
-                {
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error.Description);
-                    }
-
-                    return View(model);
-                }
+                ModelState.AddModelError(string.Empty, "Invalid email or password.");
+                return View(model);
             }
+        }
+        catch (UnauthorizedAccessException)
+        {
+            ModelState.AddModelError(string.Empty, "Invalid email or password.");
             return View(model);
         }
 
-        public async Task<IActionResult> Logout()
+        return RedirectToAction("Index", "Home");
+    }
+
+
+    public IActionResult Register()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Register(RegisterViewModel model)
+    {
+        if (!ModelState.IsValid)
         {
-            await signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return View(model);
         }
+
+        var result = await _accountService.RegisterUserAsync(model);
+        if (result.Succeeded)
+        {
+            await _accountService.AddUserRoleAsync(model.Email, model.Tip_utilizator);
+
+            return RedirectToAction("Login", "Account");
+        }
+
+        foreach (var error in result.Errors)
+        {
+            ModelState.AddModelError(string.Empty, error.Description);
+        }
+
+        return View(model);
+    }
+
+    public async Task<IActionResult> Logout()
+    {
+        await _accountService.LogoutAsync();
+        return RedirectToAction("Index", "Home");
     }
 }

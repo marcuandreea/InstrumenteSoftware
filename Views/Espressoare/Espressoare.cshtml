@@ -1,0 +1,88 @@
+﻿@model IEnumerable<mvc.Models.Espressoare>
+
+@{
+    ViewData["Title"] = "Espressoare";
+}
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Home - Coffee Shop</title>
+    <link rel="icon" href="img/logo2.png" type="image/x-icon">
+</head>
+<body class="espressoareBody">
+    <section class="products" id="menu">
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="heading">
+                <a class="menu-item" asp-action="Create">
+                    <i class="fa fa-plus-square" style="margin-right: 0.5em;"></i> Adauga espressor
+                </a>
+            </div>
+        }
+        <h1 class="heading">Espressoare automate</h1>
+        <div class="box-container">
+            @foreach (var espressor in Model.Where(e => e.Tip == "Automat").OrderBy(e => e.Nume))
+{
+                <div class="box">
+                    <div class="boxImg">
+                        <img src="@Url.Content(espressor.Poza)" alt="" width="400" height="400">
+                    </div>
+                    <div class="content">
+                        <h3>@espressor.Nume</h3>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <div class="admin-menu">
+                                <a class="menu-item" asp-action="Edit" asp-route-id="@espressor.id">
+                                    <i class="fa fa-edit me-2"></i>Edit
+                                </a>
+                                <form asp-action="Delete" asp-route-id="@espressor.id" method="post">
+                                    <button type="submit" class="menu-item">
+                                        <i class="fa fa-trash me-2"></i>Delete
+                                    </button>
+                                </form>
+                            </div>
+                        }
+                        <a asp-controller="Espressoare" asp-action="EspressorPage" asp-route-id="@espressor.id" class="btnExp">Descopera</a>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <h1 class="heading">Espressoare manuale</h1>
+        <div class="box-container">
+            @foreach (var espressor in Model.Where(e => e.Tip == "Manual").OrderBy(e => e.Nume))
+            {
+                <div class="box">
+                    <div class="boxImg">
+                        <img src="@Url.Content(espressor.Poza)" alt="" width="400" height="400">
+                    </div>
+                    <div class="content">
+                        <h3>@espressor.Nume</h3>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <div class="admin-menu">
+                                <a class="menu-item" asp-action="Edit" asp-route-id="@espressor.id">
+                                    <i class="fa fa-edit me-2"></i>Edit
+                                </a>
+                                <form asp-action="Delete" asp-route-id="@espressor.id" method="post">
+                                    <button type="submit" class="menu-item">
+                                        <i class="fa fa-trash me-2"></i>Delete
+                                    </button>
+                                </form>
+                            </div>
+                        }
+                        <a asp-controller="Espressoare" asp-action="EspressorPage" asp-route-id="@espressor.id" class="btnExp">Descopera</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+
+</body>
+</html>
+

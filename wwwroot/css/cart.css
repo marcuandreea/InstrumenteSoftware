@@ -1,0 +1,121 @@
+﻿body {
+    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+    background: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    background: url("../../img/cartbg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+.container {
+    max-width: 700px;
+    margin: 40px auto;
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 32px 24px;
+}
+
+.title {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: #333;
+    letter-spacing: 1px;
+}
+
+.cartHeader h1 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #444;
+}
+
+.listCart {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    /* Elimină align-items: center; */
+    justify-content: center;
+    vertical-align: middle;
+}
+
+.cartItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: #f1f3f6;
+    border-radius: 8px;
+    padding: 24px 32px;
+    min-width: 400px;
+    max-width: 540px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    font-size: 1.2rem;
+    gap: 18px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+    .cartItem .poza {
+        flex: 0 0 auto;
+    }
+
+    .cartItem img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 1px solid #ddd;
+        background: #fff;
+        display: block;
+    }
+
+    .cartItem .text {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: left;
+        margin: 0 24px;
+    }
+
+.deleteForm {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+        .cartItem .text span:first-child {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #222;
+        }
+
+        .cartItem .text span:last-child {
+            font-size: 1.2rem;
+            color: #000;
+        }
+
+.cartFooter {
+    text-align: center;
+    margin-top: 32px;
+}
+
+.checkOut {
+    background: #4e9cff;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 32px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+    .checkOut:hover {
+        background: #357ae8;
+    }

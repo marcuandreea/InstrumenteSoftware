@@ -1,0 +1,32 @@
+﻿@model mvc.Models.Contact
+
+@{
+    ViewData["Title"] = "Edit Contact";
+}
+
+<link rel="stylesheet" href="~/css/default2.css" asp-append-version="true" />
+
+<section class="bodyController">
+<h1>Edit Contact</h1>
+
+<form asp-action="Edit">
+    <input type="hidden" asp-for="id" />
+    <div class="form-group">
+        <label asp-for="message" class="control-label"></label>
+        <input asp-for="message" class="form-control" />
+        <span asp-validation-for="message" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+		<label asp-for="timeSent" class="control-label"></label>
+        <input asp-for="timeSent" class="form-control" type="datetime-local" />
+		<span asp-validation-for="timeSent" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="userID" class="control-label"></label>
+        <input asp-for="userID" class="form-control" />
+        <span asp-validation-for="userID" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+</section>

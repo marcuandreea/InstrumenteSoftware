@@ -9,28 +9,55 @@
 <h1>User Details</h1>
 
 <div>
-    <h4>Users</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Tip_utilizator)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Tip_utilizator)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-    </dl>
+        <table class="table">
+            <tr>
+                <th>
+					@Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tip_utilizator)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ID_abonament)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.photoPath)
+                </th>
+            </tr>
+            <tr>
+                <td>
+					@Html.DisplayFor(model => model.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Tip_utilizator)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.ID_abonament)
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(Model.photoPath))
+                    {
+                        <a href="@Model.photoPath" target="_blank">@Html.DisplayFor(model => model.photoPath)</a>
+                    }
+                    @if (string.IsNullOrEmpty(Model.photoPath))
+                    {
+                        <span>No document uploaded</span>
+                    }
+                </td>
+            </tr>
+        </table>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a> |

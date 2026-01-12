@@ -1,0 +1,82 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using mvc.ViewModels
+@model CartViewModel
+@inject UserManager<mvc.Models.Users> UserManager
+
+@{
+    ViewData["Title"] = "Cart";
+    var userId = User.Identity.IsAuthenticated ? UserManager.GetUserId(User) : "";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coș de cumpărături</title>
+    <link rel="stylesheet" href="~/css/cart.css" />
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="title">COȘ DE CUMPĂRĂTURI</div>
+        </header>
+
+        <main class="cartPage">
+            <div class="cartContent">
+                <div class="cartHeader">
+                    <h1>Produsele din coș</h1>
+                </div>
+
+                <div class="listCart">
+                    @{
+                        decimal totalPrice = 0;
+                    }
+                    @foreach (var produs in Model.CosCumparaturi.Where(c => c.UserID == userId))
+                    {
+                        <div class="cartItem">
+                            <div class="poza">
+                                <img src="@Url.Content(produs.CodEspressor != null ? produs.Espressoare.Poza : produs.Tipuri_Cafea.Poza)" />
+                            </div>
+                            <div class="text">
+                                <span>
+                                    @(produs.CodEspressor != null ? produs.Espressoare.Nume : produs.Tipuri_Cafea.Nume)
+                                </span>
+                                <span>
+                                    Pret: @(produs.CodEspressor != null ? produs.Espressoare.Pret : produs.Tipuri_Cafea.Pret) RON
+                                </span>
+                            </div>
+                            <form asp-action="DeleteFromCart" asp-controller="CosCumparaturi" method="post" class="deleteForm">
+                                <input type="hidden" name="id" value="@produs.id" />
+                                <button type="submit" class="btn btn-danger">Șterge</button>
+                            </form>
+                        </div>
+                        if (produs.CodEspressor != null && produs.Espressoare != null)
+                        {
+                            totalPrice += produs.Espressoare.Pret;
+                        }
+                        else if (produs.Tipuri_Cafea != null)
+                        {
+                            totalPrice += produs.Tipuri_Cafea.Pret;
+                        }
+                    }
+                </div>
+
+                <div class="cartHeader">
+                    <h1 style="font-size:2.5rem; margin-top:20px;">Pret total: @totalPrice RON</h1>
+
+                </div>
+
+
+                <div class="cartFooter">
+                    <form asp-action="ClearCart" asp-controller="CosCumparaturi" method="post">
+                        <button type="submit" class="btn btn-danger">Finalizează comanda</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

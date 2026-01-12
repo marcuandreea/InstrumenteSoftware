@@ -1,0 +1,51 @@
+﻿@model IEnumerable<mvc.Models.Tipuri_Cafea>
+
+@{
+    ViewData["Title"] = "Tipuri Cafea";
+}
+
+<link rel="stylesheet" href="~/css/default2.css" asp-append-version="true" />
+
+<section class="bodyController">
+    <h1>Tipuri Cafea</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Nume</th>
+                <th>Pret</th>
+                <th>Rating</th>
+                <th>Poza</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.id</td>
+                    <td>@item.Nume</td>
+                    <td>@item.Pret</td>
+                    <td>@item.Rating</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.Poza))
+                        {
+                            <a href="@item.Poza" target="_blank">@Html.DisplayFor(modelItem => item.Poza)</a>
+                        }
+                        @if (string.IsNullOrEmpty(item.Poza))
+                        {
+                            <span>No document uploaded</span>
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+<a asp-action="Create" class="btn btn-primary">Create New Coffee</a>
+</section>

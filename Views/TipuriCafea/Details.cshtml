@@ -1,0 +1,42 @@
+﻿@model mvc.Models.Tipuri_Cafea
+
+@{
+    ViewData["Title"] = "Tipuri Cafea Details";
+}
+
+<link rel="stylesheet" href="~/css/default2.css" asp-append-version="true" />
+
+<section class="bodyController">
+<h1>Tipuri Cafea Details</h1>
+
+    <div>
+        <table class="table">
+            <tr>
+                <th>ID</th>
+                <th>Nume</th>
+                <th>Pret</th>
+                <th>Rating</th>
+                <th>Poza</th>
+            </tr>
+            <tr>
+                <td>@Model.id</td>
+                <td>@Model.Nume</td>
+                <td>@Model.Pret</td>
+                <td>@Model.Rating</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(Model.Poza))
+                    {
+                        <a href="@Model.Poza" target="_blank">@Html.DisplayFor(model => Model.Poza)</a>
+                    }
+                    @if (string.IsNullOrEmpty(Model.Poza))
+                    {
+                        <span>No document uploaded</span>
+                    }
+                </td>
+            </tr>
+        </table>
+    </div>
+
+<a asp-action="Edit" asp-route-id="@Model.id" class="btn btn-warning">Edit</a>
+<a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</section>

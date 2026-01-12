@@ -1,0 +1,84 @@
+﻿@model mvc.Models.Espressoare
+
+@{
+    ViewData["Title"] = "Delete Espressoare";
+}
+
+<link rel="stylesheet" href="~/css/default2.css" asp-append-version="true" />
+
+<section class="bodyController">
+    <h1>Delete Espressoare</h1>
+
+    <div>
+        <table class="table">
+            <tr>
+                <th>ID</th>
+                <th>Nume</th>
+                <th>Pret</th>
+                <th>Cod</th>
+                <th>Descriere</th>
+                <th>Stoc</th>
+                <th>Tip</th>
+                <th>Poza</th>
+                <th>Poza Stanga</th>
+                <th>Poza Dreapta</th>
+                <th>Video</th>
+            </tr>
+            <tr>
+                <td>@Model.id</td>
+                <td>@Model.Nume</td>
+                <td>@Model.Pret</td>
+                <td>@Model.Cod</td>
+                <td>@Model.Descriere</td>
+                <td>@Model.Stoc</td>
+                <td>@Model.Tip</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(Model.Poza))
+                    {
+                        <a href="@Model.Poza" target="_blank">@Html.DisplayFor(model => Model.Poza)</a>
+                    }
+                    @if (string.IsNullOrEmpty(Model.Poza))
+                    {
+                        <span>No document uploaded</span>
+                    }
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(Model.PozaStanga))
+                    {
+                        <a href="@Model.PozaStanga" target="_blank">@Html.DisplayFor(model => Model.PozaStanga)</a>
+                    }
+                    @if (string.IsNullOrEmpty(Model.PozaStanga))
+                    {
+                        <span>No document uploaded</span>
+                    }
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(Model.PozaDreapta))
+                    {
+                        <a href="@Model.PozaDreapta" target="_blank">@Html.DisplayFor(model => Model.PozaDreapta)</a>
+                    }
+                    @if (string.IsNullOrEmpty(Model.PozaDreapta))
+                    {
+                        <span>No document uploaded</span>
+                    }
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(Model.Video))
+                    {
+                        <a href="@Model.Video" target="_blank">@Html.DisplayFor(model => Model.Video)</a>
+                    }
+                    @if (string.IsNullOrEmpty(Model.Video))
+                    {
+                        <span>No document uploaded</span>
+                    }
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="id" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</section>

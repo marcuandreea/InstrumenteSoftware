@@ -1,0 +1,34 @@
+﻿@model mvc.Models.Cos_cumparaturi
+
+@{
+    ViewData["Title"] = "Delete Cos Cumparaturi";
+}
+
+<link rel="stylesheet" href="~/css/default2.css" asp-append-version="true" />
+
+<section class="bodyController">
+    <h1>Delete Cos Cumparaturi</h1>
+
+    <div>
+        <table class="table">
+            <tr>
+                <th>id</th>
+                <th>UserID</th>
+                <th>IDCafea</th>
+                <th>CodEspressor</th>
+            </tr>
+            <tr>
+                <td>@Model.id</td>
+                <td>@Model.UserID</td>
+                <td>@Model.IDCafea</td>
+                <td>@Model.CodEspressor</td>
+            </tr>
+        </table>
+    </div>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="id" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</section>

@@ -1,0 +1,31 @@
+﻿@model mvc.Models.Cos_cumparaturi
+
+@{
+    ViewData["Title"] = "Cos Cumparaturi Details";
+}
+
+<link rel="stylesheet" href="~/css/default2.css" asp-append-version="true" />
+
+<section class="bodyController">
+    <h1>Cos Cumparaturi Details</h1>
+
+    <div>
+        <table class="table">
+            <tr>
+                <th>id</th>
+                <th>UserID</th>
+                <th>IDCafea</th>
+                <th>CodEspressor</th>
+            </tr>
+            <tr>
+                <td>@Model.id</td>
+                <td>@Model.UserID</td>
+                <td>@Model.IDCafea</td>
+                <td>@Model.CodEspressor</td>
+            </tr>
+        </table>
+    </div>
+
+<a asp-action="Edit" asp-route-id="@Model.id" class="btn btn-warning">Edit</a>
+<a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</section>

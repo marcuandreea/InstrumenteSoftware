@@ -1,0 +1,31 @@
+﻿@model mvc.Models.Review
+
+@{
+    ViewData["Title"] = "Review Details";
+}
+
+<link rel="stylesheet" href="~/css/default2.css" asp-append-version="true" />
+
+<section class="bodyController">
+    <h1>Review Details</h1>
+
+    <div>
+        <table class="table">
+            <tr>
+                <th>ID</th>
+                <th>UserID</th>
+                <th>Nota</th>
+                <th>Review</th>
+            </tr>
+            <tr>
+                <td>@Model.id</td>
+                <td>@Model.userID</td>
+                <td>@Model.nota</td>
+                <td>@Model.review</td>
+            </tr>
+        </table>
+    </div>
+
+<a asp-action="Edit" asp-route-id="@Model.id" class="btn btn-warning">Edit</a>
+<a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</section>

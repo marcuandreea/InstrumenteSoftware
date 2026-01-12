@@ -1,0 +1,70 @@
+﻿@model mvc.Models.Espressoare
+
+@{
+    ViewData["Title"] = "Edit Espressoare";
+}
+
+<link rel="stylesheet" href="~/css/default2.css" asp-append-version="true" />
+
+<section class="bodyController">
+    <h1>Edit Espressoare</h1>
+
+    <form asp-action="Edit" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="id" />
+        <div class="form-group">
+            <label asp-for="Nume"></label>
+            <input asp-for="Nume" class="form-control" />
+            <span asp-validation-for="Nume" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Pret"></label>
+            <input asp-for="Pret" class="form-control" />
+            <span asp-validation-for="Pret" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Cod"></label>
+            <input asp-for="Cod" class="form-control" />
+            <span asp-validation-for="Cod" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Descriere"></label>
+            <textarea asp-for="Descriere" class="form-control"></textarea>
+            <span asp-validation-for="Descriere" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Stoc"></label>
+            <input asp-for="Stoc" class="form-control" />
+            <span asp-validation-for="Stoc" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Tip"></label>
+            <select asp-for="Tip" class="form-control">
+                <option value="Automat">Automat</option>
+                <option value="Manual">Manual</option>
+            </select>
+            <span asp-validation-for="Tip" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="photoPathFile">Upload Poza</label>
+            <input type="file" name="photoPathFile" id="photoPathFile" class="form-control" />
+            <span class="text-danger">@ViewData["FileUploadError"]</span>
+        </div>
+        <div class="form-group">
+            <label for="photoStangaPathFile">Upload Poza Stanga</label>
+            <input type="file" name="photoStangaPathFile" id="photoStangaPathFile" class="form-control" />
+            <span class="text-danger">@ViewData["FileUploadError"]</span>
+        </div>
+        <div class="form-group">
+            <label for="photoDreaptaPathFile">Upload Poza Dreapta</label>
+            <input type="file" name="photoDreaptaPathFile" id="photoDreaptaPathFile" class="form-control" />
+            <span class="text-danger">@ViewData["FileUploadError"]</span>
+        </div>
+        <div class="form-group">
+            <label for="videoPathFile">Upload Video</label>
+            <input type="file" name="videoPathFile" id="videoPathFile" class="form-control" />
+            <span class="text-danger">@ViewData["FileUploadError"]</span>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </form>
+</section>

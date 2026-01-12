@@ -1,0 +1,44 @@
+﻿@model mvc.Models.Review
+
+@{
+    ViewData["Title"] = "Create Review";
+}
+
+<link rel="stylesheet" href="~/css/default2.css" asp-append-version="true" />
+
+<section class="bodyController">
+    <h1>Create Review</h1>
+
+    <form asp-action="Create" method="post" autocomplete="off">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="userID"></label>
+            <input asp-for="userID" class="form-control" autocomplete="off" />
+            <span asp-validation-for="userID" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="nota"></label>
+            <select asp-for="nota" class="form-control">
+                <option value="">Alege o notă</option>
+                <option value="5">★★★★★ - Excelent</option>
+                <option value="4">★★★★☆ - Foarte bun</option>
+                <option value="3">★★★☆☆ - Bun</option>
+                <option value="2">★★☆☆☆ - Slab</option>
+                <option value="1">★☆☆☆☆ - Foarte slab</option>
+            </select>
+            <span asp-validation-for="nota" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="review"></label>
+            <textarea asp-for="review" class="form-control" rows="3"></textarea>
+            <span asp-validation-for="review" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </form>
+
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }
+
+</section>

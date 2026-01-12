@@ -24,5 +24,7 @@ namespace mvc.ViewModels
 
         // Add Tip_utilizator property
         public string Tip_utilizator { get; set; } = "Vizitator";
+        public int ID_abonament { get; set; } = 0;
+        public string photoPath { get; set; } = "img/default.jpg";
     }
 }

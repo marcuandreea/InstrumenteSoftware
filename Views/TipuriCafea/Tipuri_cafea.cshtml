@@ -1,0 +1,78 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<mvc.Models.Users> UserManager
+@model IEnumerable<mvc.Models.Tipuri_Cafea>
+
+@{
+    ViewData["Title"] = "Tipuri_cafea";
+    var userId = User.Identity.IsAuthenticated ? UserManager.GetUserId(User) : "";
+}
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Home - Coffee Shop</title>
+    <link rel="icon" href="img/logo2.png" type="image/x-icon">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="cafeaBody">
+
+    <section class="products" id="products">
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="heading">
+                <a class="menu-item" asp-action="Create">
+                    <i class="fa fa-plus-square"></i> Adauga cafea
+                </a>
+            </div>
+        }
+        <div class="box-container">
+            @foreach (var tipCafea in Model)
+            {
+                <div class="box">
+                    <div class="image">
+                        <img src="@Url.Content(tipCafea.Poza)" alt="tipCafea">
+                    </div>
+                    <div class="content">
+                        <h3>@tipCafea.Nume</h3>
+                        <div class="stars">
+                            @for(var i = 0; i < tipCafea.Rating; i++)
+                            {
+                                <i class="fas fa-star"></i>
+                            }
+                        </div>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <div class="admin-menu">
+                                <a class="menu-item" asp-action="Edit" asp-route-id="@tipCafea.id">
+                                    <i class="fa fa-edit me-2"></i>Edit
+                                </a>
+                                <form asp-action="Delete" asp-route-id="@tipCafea.id" method="post">
+                                    <button type="submit" class="menu-item">
+                                        <i class="fa fa-trash me-2"></i>Delete
+                                    </button>
+                                </form>
+                            </div>
+                        }
+                        @{
+                            var oldPrice = tipCafea.Pret + 15.99;
+                        }
+                        <div class="price">@tipCafea.Pret RON<span>@oldPrice RON</span></div>
+                        <form asp-controller="CosCumparaturi" asp-action="AddToCart" method="post">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="userID" value="@userId" />
+                            <input type="hidden" name="IDCafea" value="@tipCafea.id" />
+							<input type="hidden" name="CodEspressor" value="" />
+                            <button type="submit" class="btn"><h2>Cumpărați</h2></button>
+                        </form>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+
+</body>
+</html>

@@ -1,30 +1,21 @@
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using mvc.Data;
 using mvc.Models;
-
+using mvc.ViewModels;
 namespace mvc.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly UserManager<Users> _userManager;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(UserManager<Users> userManager)
         {
-            _logger = logger;
-        }
-
-       
-        public IActionResult Contact()
-        {
-            ViewData["Title"] = "Contact"; // Set the ViewData["Title"]
-            return View();
-        }
-
-        public IActionResult Abonament()
-        {
-            ViewData["Title"] = "Abonament"; // Set the ViewData["Title"]
-            return View();
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -32,7 +23,11 @@ namespace mvc.Controllers
             ViewData["Title"] = "Index"; // Set the ViewData["Title"]
             return View();
         }
-
+        public IActionResult AccessDenied()
+        {
+            ViewData["Title"] = "AccessDenied"; // Set the ViewData["Title"]
+            return View();
+        }
         public IActionResult Intrebari()
         {
             ViewData["Title"] = "Intrebari"; // Set the ViewData["Title"]
@@ -42,36 +37,6 @@ namespace mvc.Controllers
         public IActionResult Poveste()
         {
             ViewData["Title"] = "Poveste"; // Set the ViewData["Title"]
-            return View();
-        }
-
-        public IActionResult Recenzii()
-        {
-            ViewData["Title"] = "Recenzii"; // Set the ViewData["Title"]
-            return View();
-        }
-
-        public IActionResult Rivelia()
-        {
-            ViewData["Title"] = "Rivelia"; // Set the ViewData["Title"]
-            return View();
-        }
-
-        public IActionResult Tipuri_cafea()
-        {
-            ViewData["Title"] = "Tipuri_cafea"; // Set the ViewData["Title"]
-            return View();
-        }
-
-        public IActionResult Espressoare()
-        {
-            ViewData["Title"] = "Espressoare"; // Set the ViewData["Title"]
-            return View();
-        }
-
-        public IActionResult User()
-        {
-            ViewData["Title"] = "User"; // Set the ViewData["Title"]
             return View();
         }
 

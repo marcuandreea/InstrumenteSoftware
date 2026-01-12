@@ -15,6 +15,9 @@
     <thead>
         <tr>
             <th>
+					@Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Tip_utilizator)
             </th>
             <th>
@@ -23,13 +26,24 @@
             <th>
                 @Html.DisplayNameFor(model => model.Email)
             </th>
-            <th></th>
+			<th>
+				@Html.DisplayNameFor(model => model.ID_abonament)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.photoPath)
+            </th>
+		    <th>
+                 Actions
+            </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
+                <td>
+						@Html.DisplayFor(modelItem => item.Id)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Tip_utilizator)
                 </td>
@@ -39,6 +53,19 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
+					<td>
+						@Html.DisplayFor(modelItem => item.ID_abonament)
+					</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.photoPath))
+                        {
+                            <a href="@item.photoPath" target="_blank">@Html.DisplayFor(modelItem => item.photoPath)</a>
+                        }
+                        @if (string.IsNullOrEmpty(item.photoPath))
+                        {
+                            <span>No document uploaded</span>
+                        }
+                    </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a> |

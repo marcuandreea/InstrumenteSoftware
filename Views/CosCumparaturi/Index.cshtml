@@ -1,0 +1,40 @@
+﻿@model IEnumerable<mvc.Models.Cos_cumparaturi>
+
+@{
+    ViewData["Title"] = "Cos Cumparaturi";
+}
+
+<link rel="stylesheet" href="~/css/default2.css" asp-append-version="true" />
+
+<section class="bodyController">
+    <h1>Cos Cumparaturi</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>UserID</th>
+                <th>IDCafea</th>
+                <th>CodEspressor</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.id</td>
+                    <td>@item.UserID</td>
+                    <td>@item.IDCafea</td>
+                    <td>@item.CodEspressor</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+<a asp-action="Create" class="btn btn-primary">Create New Coffee</a>
+</section>

@@ -1,0 +1,43 @@
+﻿@model mvc.Models.Tipuri_Cafea
+
+@{
+    ViewData["Title"] = "Create Tipuri Cafea";
+}
+
+<link rel="stylesheet" href="~/css/default2.css" asp-append-version="true" />
+
+<section class="bodyController">
+    <h1>Create Tipuri Cafea</h1>
+
+    <form asp-action="Create" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label asp-for="Nume"></label>
+            <input asp-for="Nume" class="form-control" />
+            <span asp-validation-for="Nume" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Pret"></label>
+            <input asp-for="Pret" class="form-control" />
+            <span asp-validation-for="Pret" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Rating"></label>
+            <select asp-for="Rating" class="form-control">
+                <option value="5">5</option>
+                <option value="4">4</option>
+                <option value="3">3</option>
+                <option value="2">2</option>
+                <option value="1">1</option>
+            </select>
+            <span asp-validation-for="Rating" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="photoPathFile">Upload Document</label>
+            <input type="file" name="photoPathFile" id="photoPathFile" class="form-control" />
+            <span class="text-danger">@ViewData["FileUploadError"]</span>
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+
+    </form>
+</section>

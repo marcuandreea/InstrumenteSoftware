@@ -1,0 +1,98 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using mvc.ViewModels
+@model ReviewViewModel
+
+@{
+    ViewData["Title"] = "Recenzii";
+}
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Home - Coffee Shop</title>
+    <link rel="icon" href="img/logo2.png" type="image/x-icon">
+    <link rel="stylesheet" href="~/css/review.css">
+</head>
+<body>
+    <section class="reviewForm">
+        <div class="review-form">
+            <h2>Lasă o recenzie</h2>
+            <form asp-action="AddReview" asp-controller="Review" method="post">
+                <input type="hidden" name="userID" value="@User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value" />
+
+                <label for="nota">Notă:</label>
+                <select id="nota" name="nota" required>
+                    <option value="">Alege o notă</option>
+                    <option value="5">★★★★★ - Excelent</option>
+                    <option value="4">★★★★☆ - Foarte bun</option>
+                    <option value="3">★★★☆☆ - Bun</option>
+                    <option value="2">★★☆☆☆ - Slab</option>
+                    <option value="1">★☆☆☆☆ - Foarte slab</option>
+                </select>
+
+                <label for="review">Recenzia ta:</label>
+                <textarea id="review" name="review" rows="5" required></textarea>
+
+                <button type="submit" class="btnExp">Trimite recenzia</button>
+            </form>
+
+        </div>
+    </section>
+
+
+    <section class="review" id="review" style="margin-top:0px;">
+
+        <h1 class="heading"> Parerea celor care au avut incredere in noi </h1>
+
+        <div class="box-container">
+
+            
+            @foreach (var review in Model.Review)
+            {
+                var user = Model.Users.FirstOrDefault(u => u.Id == review.userID);
+                <div class="box">
+                    <img src="~/img/quote-img.png" alt="" class="quote">
+                    <p>@review.review</p>
+                    <img src="@(user?.photoPath ?? "~/img/default-user.png")" class="user" alt="">
+                    <h3>@(user?.UserName ?? "Anonim")</h3>
+                    <div class="stars">
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            if (i <= review.nota)
+                            {
+                                <i class="fas fa-star"></i>
+                            }
+                            else
+                            {
+                                <i class="far fa-star"></i>
+                            }
+                        }
+                    </div>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <div class="admin-menu">
+                            <a class="menu-item" asp-action="Edit" asp-route-id="@review.id">
+                                <i class="fa fa-edit me-2"></i>Edit
+                            </a>
+                            <form asp-action="Delete" asp-route-id="@review.id" method="post">
+                                <button type="submit" class="menu-item">
+                                    <i class="fa fa-trash me-2"></i>Delete
+                                </button>
+                            </form>
+                        </div>
+                    }
+                </div>
+            }
+
+
+        </div>
+
+    </section>
+
+    <script src="assets/js/isLogged.js"></script>
+</body>
+</html>

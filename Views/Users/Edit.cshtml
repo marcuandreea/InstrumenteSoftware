@@ -6,37 +6,56 @@
 
 <link rel="stylesheet" href="~/css/default2.css" asp-append-version="true" />
 <section class="bodyController">
-<h1>Edit User</h1>
+    <h1>Edit User</h1>
 
-<h4>Users</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="UserName" class="control-label"></label>
-                <input asp-for="UserName" class="form-control" />
-                <span asp-validation-for="UserName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Tip_utilizator" class="control-label"></label>
-                <input asp-for="Tip_utilizator" class="form-control" />
-                <span asp-validation-for="Tip_utilizator" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+    <h4>Users</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="photoPath">
+                <div class="form-group">
+                    <label asp-for="UserName" class="control-label"></label>
+                    <input asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class ="form-group">
+                    <label for="newPassword" class="control-label">New Password</label>
+                    <input type="password" name="newPassword" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Tip_utilizator" class="control-label"></label>
+                    <select asp-for="Tip_utilizator" class="form-control">
+                        <option value="Vizitator">Vizitator</option>
+                        <option value="Abonat">Abonat</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                    <span asp-validation-for="Tip_utilizator" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ID_abonament" class="control-label"></label>
+                    <input asp-for="ID_abonament" class="form-control" />
+                    <span asp-validation-for="ID_abonament" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="photoPathFile" class="control-label">Upload Document</label>
+                    <input type="file" name="photoPathFile" id="photoPathFile" class="form-control" />
+                    <span class="text-danger">@ViewData["FileUploadError"]</span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
 </section>

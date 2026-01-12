@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - mvc</title>
-    <link rel="stylesheet" href="~/css/default.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/main.css" asp-append-version="true" />
  
 </head>
 <body>
@@ -18,13 +18,13 @@
         <nav class="navbar">
             <ul>
                 <li><a asp-controller="Home" asp-action="Index">Acasa</a></li>
-                <li><a asp-controller="Home" asp-action="Espressoare">Espressoare</a></li>
+                <li><a asp-controller="Espressoare" asp-action="Espressoare">Espressoare</a></li>
                 <li><a asp-controller="Home" asp-action="Poveste">Povestea noastra</a></li>
-                <li><a asp-controller="Home" asp-action="Tipuri_cafea">Tipuri cafea</a></li>
-                <li><a asp-controller="Home" asp-action="Abonament">Abonament cafea</a></li>
-                <li><a asp-controller="Home" asp-action="Recenzii">Recenzii</a></li>
+                <li><a asp-controller="TipuriCafea" asp-action="Tipuri_cafea">Tipuri cafea</a></li>
+                <li><a asp-controller="Subscription" asp-action="Abonament">Abonament cafea</a></li>
+                <li><a asp-controller="Review" asp-action="Recenzii">Recenzii</a></li>
                 <li><a asp-controller="Home" asp-action="Intrebari">Intrebari frecvente</a></li>
-                <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
+                <li><a asp-controller="Contact" asp-action="Contact">Contact</a></li>
                 @if (signInManager.IsSignedIn(User))
                 {
                     <li class="nav-item">
@@ -36,10 +36,14 @@
         </nav>
 
         <div class="icons">
-            <div class="fas fa-shopping-cart" id="cart-btn"></div>
+
+            <a asp-controller="CosCumparaturi" asp-action="Cart"><div class="fas fa-shopping-cart" id="cart-btn"></div> </a>
+
+
+            
             @if (signInManager.IsSignedIn(User))
             {
-                <a asp-controller="Home" asp-action="User" id="loginVerify"><div class="fas fa-user" id="login-btn"></div></a>
+                <a asp-controller="Users" asp-action="User" id="loginVerify"><div class="fas fa-user" id="login-btn"></div></a>
             }
             else
             {
@@ -56,11 +60,12 @@
         </main>
     </div>
 
-   
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/footer.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -1,0 +1,39 @@
+﻿@model mvc.Models.Review
+
+@{
+    ViewData["Title"] = "Edit Review";
+}
+
+<link rel="stylesheet" href="~/css/default2.css" asp-append-version="true" />
+
+<section class="bodyController">
+    <h1>Edit Review</h1>
+
+    <form asp-action="Edit" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="id" />
+        <div class="form-group">
+            <label asp-for="userID"></label>
+            <input asp-for="userID" class="form-control" />
+            <span asp-validation-for="userID" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="nota"></label>
+            <select asp-for="nota" class="form-control">
+                <option value="">Alege o notă</option>
+                <option value="5">★★★★★ - Excelent</option>
+                <option value="4">★★★★☆ - Foarte bun</option>
+                <option value="3">★★★☆☆ - Bun</option>
+                <option value="2">★★☆☆☆ - Slab</option>
+                <option value="1">★☆☆☆☆ - Foarte slab</option>
+            </select>
+            <span asp-validation-for="nota" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="review"></label>
+            <input asp-for="review" class="form-control" />
+            <span asp-validation-for="review" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </form>
+</section>

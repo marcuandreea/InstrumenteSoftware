@@ -1,0 +1,42 @@
+﻿.reviewForm {
+    margin-top: 100px;
+    margin-bottom: 0px;
+}
+
+.review-form {
+    max-width: 500px;
+    margin: auto;
+    background-color: #292929;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+    .review-form h2 {
+        margin-bottom: 15px;
+        text-align: center;
+        color: #fff;
+    }
+
+    .review-form label {
+        display: block;
+        margin-top: 15px;
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+
+    .review-form input,
+    .review-form textarea,
+    .review-form select,
+    .review-form option{
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        color: #000;
+    }
+
+.btnExp {
+    margin-left: 105px;
+}

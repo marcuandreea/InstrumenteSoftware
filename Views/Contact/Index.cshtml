@@ -1,0 +1,41 @@
+﻿@model IEnumerable<mvc.Models.Contact>
+
+@{
+    ViewData["Title"] = "Contacts";
+}
+
+<link rel="stylesheet" href="~/css/default2.css" asp-append-version="true" />
+
+<section class="bodyController">
+<h1>Contacts</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Message</th>
+            <th>Time Sent</th>
+            <th>User ID</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var contact in Model)
+        {
+            <tr>
+                <td>@contact.id</td>
+                <td>@contact.message</td>
+                <td>@contact.timeSent</td>
+                <td>@contact.userID</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@contact.id" class="btn btn-info">Details</a>
+                    <a asp-action="Edit" asp-route-id="@contact.id" class="btn btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@contact.id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Create" class="btn btn-primary">Create New Contact</a>
+</section>
